@@ -1,17 +1,27 @@
 import pymysql
 from pymysql import Error
+import os
+
+def _env(key: str) -> str:
+    """필수 환경변수를 읽는다. 누락 시 명확한 메시지로 실패시킨다."""
+    value = os.environ.get(key)
+    if not value:
+        raise RuntimeError(
+            f"환경변수 {key} 가 설정되지 않았습니다. .env.example 참고 후 .env에 설정하세요."
+        )
+    return value
 
 class Database:
     def __init__(self):
         self.connection = None
         try:
             self.connection = pymysql.connect(
-                host='svc.sel3.cloudtype.app',
+                host=_env("DB_HOST"),
                 # host='mariadb',  # cloudtype 사용 시
-                port=32387,   # cloudtype 사용 시
-                database='test',  # test 데이터베이스 사용
-                user='root',
-                password='root',  # mariadb 설치 당시의 패스워드, 실제 환경에서는 보안을 위해 환경변수 등을 사용
+                port=int(_env("DB_PORT")),   # cloudtype 사용 시
+                database=_env("DB_NAME"),  # test 데이터베이스 사용
+                user=_env("DB_USER"),
+                password=_env("DB_PASSWORD"),  # mariadb 설치 당시의 패스워드, 실제 환경에서는 보안을 위해 환경변수 등을 사용
                 charset='utf8mb4',
                 cursorclass=pymysql.cursors.DictCursor   # 쿼리 결과를 딕셔너리로 변환
             )
