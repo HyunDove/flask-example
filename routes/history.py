@@ -1,8 +1,8 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Blueprint, render_template
 from models.client import Database
 
 db = Database()
-history_route = Flask("history", __name__)
+history_route = Blueprint('history', __name__)
 
 @history_route.route('/history')
 def history():

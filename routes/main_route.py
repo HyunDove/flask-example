@@ -1,6 +1,6 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Blueprint, render_template
 
-main_route = Flask("main", __name__)
+main_route = Blueprint('main', __name__)
 
 @main_route.route('/', methods=['GET'])
 def index():

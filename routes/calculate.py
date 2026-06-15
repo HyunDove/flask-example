@@ -1,8 +1,8 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request
 from services.bmi_calculator_service import BMICalculator
 from models.client import Database
 
-calculate_route = Flask("calculate", __name__)
+calculate_route = Blueprint('calculate', __name__)
 db = Database()
 
 @calculate_route.route('/calculate', methods=['POST'])
