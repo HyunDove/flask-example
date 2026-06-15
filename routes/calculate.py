@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request
-from services.bmi_calculator_service import BMICalculator
+from services.calculator_service import BMICalculator
 from models.client import Database
 
 calculate_route = Blueprint('calculate', __name__)
