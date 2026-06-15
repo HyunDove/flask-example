@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template
 from models.client import Database
+global db
 
-db = Database()
 history_route = Blueprint('history', __name__)
 
 @history_route.route('/history')

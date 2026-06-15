@@ -1,9 +1,9 @@
 from flask import Blueprint, render_template, request
 from services.calculator_service import BMICalculator
 from models.client import Database
+global db
 
 calculate_route = Blueprint('calculate', __name__)
-db = Database()
 
 @calculate_route.route('/calculate', methods=['POST'])
 def calculate():

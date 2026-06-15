@@ -12,6 +12,13 @@ db = Database()   # DB 초기화
 # 애플리케이션 종료 시 DB 연결 종료
 atexit.register(db.close)
 
+def init_db(database_instance):
+    """DB 인스턴스를 설정하는 헬퍼 함수"""
+    global db
+    db = database_instance
+
+init_db(db)
+
 # 라우트 등록
 app.register_blueprint(main_route)
 app.register_blueprint(calculate_route)
